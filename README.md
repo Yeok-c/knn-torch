@@ -55,15 +55,23 @@ print(f"for k = {i}, acc: {acc}")
 ## Output
 
 > for k = 10, acc: 0.8619999885559082
+>
 > ...
+>
 > for k = 210, acc: 0.8115000128746033
+>
 > Time taken to run 20 trials with knn-torch:  0:00:00.034190
-? 
+>
 > for k = 10, acc: 0.8619999885559082
+>
 > ...
+>
 > for k = 210, acc: 0.8149999976158142
+>
 > Time taken to run 20 trials with sklearn:  0:00:02.614075
 > 
+>
+>
 > Speedup:  76.45729745539631  times
 
 ## Plots
