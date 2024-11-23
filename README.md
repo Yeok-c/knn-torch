@@ -8,7 +8,7 @@
 ...
 
 <!-- Badges: -->
-[pypi-image]: https://img.shields.io/pypi/v/knn-torch
+[pypi-image]: https://img.shields.io/pypi/v/knn-torch/
 [pypi-url]: https://pypi.org/project/knn-torch/
 [stars-image]: https://img.shields.io/github/stars/yeok-c/knn-torch/
 [stars-url]: https://github.com/Yeok-c/knn-torch/
