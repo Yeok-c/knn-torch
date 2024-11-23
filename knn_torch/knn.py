@@ -16,7 +16,7 @@ class KNN:
         s_mag=100,  # number of centers of the H_sv function
         n_train=1000,  # number of training data
         n_test=4000,  # number of test data
-        k_max=50,  # max number of neighbours asked in all trials, specified because all the distances between points are calculated and sorted up to k_max neighbours during init
+        k_max=200,  # max number of neighbours asked in all trials, specified because all the distances between points are calculated and sorted up to k_max neighbours during init
         plotting_reso=50,  # resolution of grid for plotting the 'background' colors specifying which areas would be classified into 0 or 1 in the H_sv function
         plot_flag=False,  # whether to plot the results
         seed=None,  # seed for reproducibility, currently unused
@@ -102,7 +102,9 @@ class KNN:
         except Exception as e:
             pass  # print(f"Already made dir probabily, {e}")
         date_time = datetime.now().strftime("%Y%m%d_%H%M%S")
-        fig.savefig(f"./results/{self.save_subfolder}/part_a.png")
+        fig.savefig(
+            f"./results/{self.save_subfolder}/underlying_distribution_visualized.png"
+        )
         # plt.show()
         plt.close()
 
@@ -233,12 +235,35 @@ class KNN:
         return k_nearest_indices
 
 
-# Testing the KNN class
+# Testing knn-torch
 torch.device("cuda" if torch.cuda.is_available() else "cpu")
-knn = KNN(noisy=False, n_train=4000, n_test=1000, plotting_reso=200, plot_flag=True)
+knn = KNN(noisy=True, n_train=10000, n_test=2000, plotting_reso=200, plot_flag=False)
 knn._plot_generate_grid_hsv(knn.plotting_reso, 3)
 time = datetime.now()
-for i in range(10, 20, 5):
+for i in range(10, 220, 10):
     acc = knn.classify_and_evaluate(k=i)
     print(f"for k = {i}, acc: {acc}")
-print("Time taken: ", datetime.now() - time)
+t_torch = datetime.now() - time
+print("\nTime taken to run 20 trials with knn-torch: ", t_torch)
+
+# Testing sk-learn's knn
+from sklearn.neighbors import KNeighborsClassifier
+
+time = datetime.now()
+for i in range(10, 220, 10):
+    neigh = KNeighborsClassifier(n_neighbors=i)
+    neigh.fit(knn.data_train["X"], knn.data_train["Y"])
+    preds = neigh.predict(knn.data_test["X"])
+    acc = (preds == knn.data_test["Y"]).sum() / len(preds)
+    print(f"for k = {i}, acc: {acc}")
+t_sklearn = datetime.now() - time
+print("\nTime taken to run 20 trials with sklearn: ", t_sklearn)
+
+print("Speedup: ", t_sklearn / t_torch, " times")
+
+# Rerun with plotting for visualization cases
+torch.device("cuda" if torch.cuda.is_available() else "cpu")
+knn = KNN(noisy=True, n_train=10000, n_test=2000, plotting_reso=200, plot_flag=True)
+knn._plot_generate_grid_hsv(knn.plotting_reso, 3)
+acc = knn.classify_and_evaluate(k=10)
+print(f"for k = {i}, acc: {acc}")
