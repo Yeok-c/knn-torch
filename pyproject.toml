@@ -6,13 +6,14 @@ authors = ["Yeok-c <yeokch@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.9,<3.13"
 matplotlib = "^3.9.2"
 torch = "^2.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.1"
+scriv = {extras = ["toml"], version = "^1.5.1"}
 
 [build-system]
 requires = ["poetry-core"]
