@@ -1,4 +1,4 @@
-
+# knn-troch
 [![PyPI Version][pypi-image]][pypi-url]
 [![][versions-image]][versions-url]
 
@@ -16,8 +16,10 @@
 [versions-image]: https://img.shields.io/pypi/pyversions/knn-torch
 [versions-url]: https://pypi.org/project/knn-torch
 
-Code works as you run knn.py, pre-commit / code coverage / pytest not properly configured yet
+## Code works as you run knn.py, pre-commit / code coverage / pytest not properly configured yet
 
+
+## Example
 ```
 # Testing knn-torch
 torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -51,17 +53,19 @@ knn._plot_generate_grid_hsv(knn.plotting_reso, 3)
 acc = knn.classify_and_evaluate(k=10)
 print(f"for k = {i}, acc: {acc}")
 ```
-for k = 10, acc: 0.8619999885559082
-...
-for k = 210, acc: 0.8115000128746033
-Time taken to run 20 trials with knn-torch:  0:00:00.034190
+## Output
 
-for k = 10, acc: 0.8619999885559082
-...
-for k = 210, acc: 0.8149999976158142
-Time taken to run 20 trials with sklearn:  0:00:02.614075
-
-Speedup:  76.45729745539631  times
+> for k = 10, acc: 0.8619999885559082
+> ...
+> for k = 210, acc: 0.8115000128746033
+> Time taken to run 20 trials with knn-torch:  0:00:00.034190
+? 
+> for k = 10, acc: 0.8619999885559082
+> ...
+> for k = 210, acc: 0.8149999976158142
+> Time taken to run 20 trials with sklearn:  0:00:02.614075
+> 
+> Speedup:  76.45729745539631  times
 
 ## Philosophy
 Pre-compute the distances between all points within a distribution first with torch mat multiplications (significantly faster than numpy's loops), then choose the distances of how up to k-neighbours to use for voting. 
