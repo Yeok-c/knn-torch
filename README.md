@@ -66,5 +66,8 @@ print(f"for k = {i}, acc: {acc}")
 > 
 > Speedup:  76.45729745539631  times
 
+## Plots
+![Visualization](https://github.com/Yeok-c/knn-torch/example_results/10000_10_000.png)
+
 ## Philosophy
 Pre-compute the distances between all points within a distribution first with torch mat multiplications (significantly faster than numpy's loops), then choose the distances of how up to k-neighbours to use for voting. 
