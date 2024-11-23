@@ -6,7 +6,6 @@
 [![Build Status][build-image]][build-url]
 [![Code Coverage][coverage-image]][coverage-url]
 -->
-...
 
 <!-- Badges: -->
 [pypi-image]: https://img.shields.io/pypi/v/knn-torch
