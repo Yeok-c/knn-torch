@@ -1,4 +1,4 @@
-# knn-troch
+# knn-torch
 [![PyPI Version][pypi-image]][pypi-url]
 [![][versions-image]][versions-url]
 
